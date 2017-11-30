@@ -9,19 +9,24 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {MatButtonModule} from "@angular/material";
 import { FilterByNamePipe } from './pipes/filter-by-name.pipe';
 import { NameFilterPipe } from './pipes/name-filter.pipe';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { ClearNamePipe } from './pipes/clear-name.pipe';
 
 
 @NgModule({
     declarations: [
         AppComponent,
         FilterByNamePipe,
-        NameFilterPipe
+        NameFilterPipe,
+        ClearNamePipe
     ],
     imports: [
         BrowserModule,
         HttpClientModule,
         BrowserAnimationsModule,
-        MatButtonModule
+        MatButtonModule,
+        ReactiveFormsModule,
+        FormsModule
     ],
     providers: [BackendService],
     bootstrap: [AppComponent]

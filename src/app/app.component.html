@@ -1,40 +1,39 @@
 <div class="container-fluid">
-    <div class="row">
+    <div class="row mt-4">
         <div class="col">
             <div class="input-group">
-                <input (keyup.enter)="onInputEnter(itemName.value)" #itemName type="text" class="form-control" placeholder="Item neve" aria-describedby="item-name">
-                <span (click)="onTradeQuery(itemName.value)" class="input-group-addon" id="item-name">@</span>
+                <input (keyup.enter)="onSearch(filter.value)" #filter [(ngModel)]="searchTerm" type="text" class="form-control" placeholder="Item neve" aria-describedby="item-name">
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row mt-4">
         <div class="col">
             <ul class="list-group">
-                <!--<li *ngFor="let stash of stashes;" class="list-group-item">-->
-                    <!--<div class="row">-->
-                        <!--<div class="col-2">AccountName</div>-->
-                        <!--<div class="col-10">{{stash.date}}</div>-->
-                    <!--</div>-->
-                    <!--<div class="row">-->
-                        <!--<div class="col-2">CharacterName</div>-->
-                        <!--<div class="col-10">{{stash.lastCharacterName}}</div>-->
-                    <!--</div>-->
-                    <!--&lt;!&ndash;<div class="row">&ndash;&gt;-->
-                        <!--&lt;!&ndash;<div class="col">&ndash;&gt;-->
-                            <!--&lt;!&ndash;<ul class="list-group">&ndash;&gt;-->
-                                <!--&lt;!&ndash;<li *ngFor="let item of stash.items;" class="list-group-item">&ndash;&gt;-->
-                                    <!--&lt;!&ndash;<div class="row">&ndash;&gt;-->
-                                        <!--&lt;!&ndash;<div class="col-2">{{item.name}}</div>&ndash;&gt;-->
-                                        <!--&lt;!&ndash;<div [ngStyle]="{'background-image': 'url(' + item.icon + ')'}" class="col-2 icon"></div>&ndash;&gt;-->
-                                        <!--&lt;!&ndash;<div class="col">&ndash;&gt;-->
-                                            <!--&lt;!&ndash;{{item.note}}&ndash;&gt;-->
-                                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
-                                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
-                                <!--&lt;!&ndash;</li>&ndash;&gt;-->
-                            <!--&lt;!&ndash;</ul>&ndash;&gt;-->
-                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
-                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
-                <!--</li>-->
+                <li *ngFor="let stash of filteredStashes;" class="list-group-item">
+                    <div class="row">
+                        <div class="col-2">AccountName</div>
+                        <div class="col-10">{{stash.date}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-2">CharacterName</div>
+                        <div class="col-10">{{stash.lastCharacterName}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <ul class="list-group">
+                                <li *ngFor="let item of stash.items | nameFilter: filter.value;" class="list-group-item">
+                                    <div class="row">
+                                        <div class="col-2">{{item.name | clearName}}</div>
+                                        <!--<div [ngStyle]="{'background-image': 'url(' + item.icon + ')'}" class="col-2 icon"></div>-->
+                                        <div class="col">
+                                            {{item.note}}
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
             </ul>
         </div>
     </div>
